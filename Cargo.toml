@@ -1,0 +1,23 @@
+# Repro for https://github.com/ebarnard/rust-plist/issues/75
+
+[package]
+name = "plist_repro"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+# This commit works:
+#     Value: Boolean(true)
+# plist = { git = "https://github.com/ebarnard/rust-plist", rev = "f518ab0c00f0a1d8b3ac9ee40eace4dc5484857c" }
+
+# This commit fails with:
+#     thread 'main' panicked at 'called `Result::unwrap()` on an `Err` value:
+#     Message("invalid type: newtype struct, expected any supported plist value", None)', src/main.rs:2:65
+plist = { git = "https://github.com/ebarnard/rust-plist", rev = "6ee1be24d8e72cb229dfe56e777f422cd4c2977c" }
+
+# These versions also fail:
+# plist = "1.3.0"
+# plist = "1.2.1"
+
+
+serde_yaml = "0.8.21"
